@@ -1,0 +1,94 @@
+{
+  "name": "@panom/arc",
+  "version": "0.1.0",
+  "description": "Camera-readable ARC authentication toolkit for shared grid rendering, Vue scanning flows, Express server routes, and realistic end-to-end simulations.",
+  "license": "MIT",
+  "main": "index.cjs",
+  "module": "index.mjs",
+  "types": "index.d.ts",
+  "sideEffects": false,
+  "engines": {
+    "node": ">=18"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "keywords": [
+    "auth",
+    "camera-auth",
+    "device-linking",
+    "vue",
+    "express",
+    "qr-alternative",
+    "computer-vision",
+    "simulation"
+  ],
+  "peerDependencies": {
+    "express": "^4.19.0 || ^5.0.0",
+    "vue": "^3.4.0"
+  },
+  "peerDependenciesMeta": {
+    "express": {
+      "optional": true
+    },
+    "vue": {
+      "optional": true
+    }
+  },
+  "scripts": {
+    "selftest": "node -e \"import('./testing.mjs').then((m) => m.runArcStartupSelfTests())\"",
+    "pack:check": "npm pack --dry-run"
+  },
+  "exports": {
+    ".": {
+      "types": "./index.d.ts",
+      "import": "./index.mjs",
+      "require": "./index.cjs",
+      "default": "./index.mjs"
+    },
+    "./shared": {
+      "types": "./shared.d.ts",
+      "import": "./shared.mjs",
+      "require": "./shared.cjs",
+      "default": "./shared.mjs"
+    },
+    "./client": {
+      "types": "./client.d.ts",
+      "import": "./client.mjs",
+      "require": "./client.cjs",
+      "default": "./client.mjs"
+    },
+    "./server": {
+      "types": "./server.d.ts",
+      "import": "./server.mjs",
+      "require": "./server.cjs",
+      "default": "./server.mjs"
+    },
+    "./testing": {
+      "types": "./testing.d.ts",
+      "import": "./testing.mjs",
+      "require": "./testing.cjs",
+      "default": "./testing.mjs"
+    }
+  },
+  "files": [
+    "index.cjs",
+    "index.mjs",
+    "index.d.ts",
+    "shared.cjs",
+    "shared.mjs",
+    "shared.d.ts",
+    "client.cjs",
+    "client.mjs",
+    "client.d.ts",
+    "scanner-engine.mjs",
+    "server.cjs",
+    "server.mjs",
+    "server.d.ts",
+    "testing.cjs",
+    "testing.mjs",
+    "testing.d.ts",
+    "README.md",
+    "LICENSE"
+  ]
+}
