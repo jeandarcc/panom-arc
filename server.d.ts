@@ -49,7 +49,7 @@ export declare function bindArcChallengeUser(challengeId: string, userId: string
 export declare function createArcRouteHarness(deps: Pick<ArcRouterDeps, 'issueSession' | 'publicSessionUser' | 'getUserById' | 'logArcLogin'>): {
   challenge(ctx: ArcAuthContext): Promise<{ statusCode: number; body: any }>;
   sessionChallenge(ctx: ArcAuthContext, userId: string): Promise<{ statusCode: number; body: any }>;
-  status(ctx: ArcAuthContext, challengeId: string): Promise<{ statusCode: number; body: any }>;
-  scan(ctx: ArcAuthContext, observedBits: number, candidateId?: string): Promise<{ statusCode: number; body: any }>;
+  status(ctx: ArcAuthContext, challengeId: string, res?: Response): Promise<{ statusCode: number; body: any }>;
+  scan(ctx: ArcAuthContext, observedBits: number, candidateId?: string, res?: Response): Promise<{ statusCode: number; body: any }>;
 };
 export declare function createArcRouter(deps: ArcRouterDeps): any;

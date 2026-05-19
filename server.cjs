@@ -334,7 +334,7 @@ function createArcRouteHarness(deps) {
     async sessionChallenge(ctx, userId) {
       return { statusCode: 200, body: await createArcChallenge(ctx, userId) };
     },
-    async status(ctx, challengeId) {
+    async status(ctx, challengeId, res) {
       if (!challengeId || typeof challengeId !== 'string') {
         return { statusCode: 400, body: { error: 'Invalid challengeId' } };
       }
@@ -345,8 +345,7 @@ function createArcRouteHarness(deps) {
           await audit(ctx, 'FAILURE', { userId: status.userId, reason: 'user_not_found_or_deleted' });
           return { statusCode: 200, body: { status: 'expired' } };
         }
-        const responseShell = {};
-        const { accessToken, refreshToken } = await issueSession(responseShell, user, ctx);
+        const { accessToken, refreshToken } = await issueSession(res, user, ctx);
         await audit(ctx, 'SUCCESS', { userId: user.id });
         return {
           statusCode: 200,
@@ -355,7 +354,7 @@ function createArcRouteHarness(deps) {
       }
       return { statusCode: 200, body: { status: status.status } };
     },
-    async scan(ctx, observedBits, candidateId) {
+    async scan(ctx, observedBits, candidateId, res) {
       if (typeof observedBits !== 'number' || observedBits < 0 || observedBits > 0xffff) {
         console.log(`[ARC route] reject scan reason=invalid-bits got=${String(observedBits)}`);
         return { statusCode: 400, body: { error: 'observedBits must be a 16-bit integer' } };
@@ -380,8 +379,7 @@ function createArcRouteHarness(deps) {
           await audit(ctx, 'FAILURE', { userId: result.userId, reason: 'user_not_found_or_deleted' });
           return { statusCode: 403, body: { error: 'User not found or deleted' } };
         }
-        const responseShell = {};
-        const { accessToken, refreshToken } = await issueSession(responseShell, user, ctx);
+        const { accessToken, refreshToken } = await issueSession(res, user, ctx);
         console.log(`[ARC route] session-issued challenge=${result.challengeId?.slice(-6) ?? 'none'} userId=${user.id}`);
         await audit(ctx, 'SUCCESS', { userId: user.id });
         return {
@@ -454,7 +452,7 @@ function createArcRouter(deps) {
 
       const ctx = authContext(req);
       try {
-        const result = await handlers.status(ctx, challengeId);
+        const result = await handlers.status(ctx, challengeId, res);
         return res.status(result.statusCode).json(result.body);
       } catch (err) {
         console.error('[ARC] status poll error:', err);
@@ -490,7 +488,7 @@ function createArcRouter(deps) {
       const ctx = { ...authContext(req), userId: req.user?.id ?? null };
       const { observedBits, candidateId } = req.body;
       try {
-        const result = await handlers.scan(ctx, observedBits, candidateId ?? undefined);
+        const result = await handlers.scan(ctx, observedBits, candidateId ?? undefined, res);
         return res.status(result.statusCode).json(result.body);
       } catch (err) {
         console.error('[ARC] scan error:', err);
