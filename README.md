@@ -1,8 +1,8 @@
-# `@panom/arc`
+# `@panomapp/arc`
 
 Camera-readable ARC authentication toolkit.
 
-`@panom/arc` packages the full ARC stack in one place:
+`@panomapp/arc` packages the full ARC stack in one place:
 
 - shared grid and detection primitives
 - Vue client helpers for rendering and camera scanning
@@ -16,17 +16,17 @@ It is designed for device-linking flows like WhatsApp Web or Steam Guard, where 
 Install only the entrypoints you need.
 
 ```bash
-npm install @panom/arc
+npm install @panomapp/arc
 ```
 
 Optional peer dependencies:
 
-- `vue` for `@panom/arc/client`
-- `express` for `@panom/arc/server`
+- `vue` for `@panomapp/arc/client`
+- `express` for `@panomapp/arc/server`
 
 ## Package entrypoints
 
-### `@panom/arc`
+### `@panomapp/arc`
 
 Shared types and low-level helpers:
 
@@ -38,7 +38,7 @@ Shared types and low-level helpers:
 - `makeArcFixtures`
 - `makeArcScenarios`
 
-### `@panom/arc/client`
+### `@panomapp/arc/client`
 
 Vue-facing client helpers:
 
@@ -47,7 +47,7 @@ Vue-facing client helpers:
 - `useArcSlotPlayback()`
 - `createArcScannerEngine()`
 
-### `@panom/arc/server`
+### `@panomapp/arc/server`
 
 Server helpers:
 
@@ -58,7 +58,7 @@ Server helpers:
 - `scanArcPattern()`
 - `bindArcChallengeUser()`
 
-### `@panom/arc/testing`
+### `@panomapp/arc/testing`
 
 Simulation and self-test helpers:
 
@@ -76,7 +76,7 @@ Simulation and self-test helpers:
 import express, { Router } from 'express';
 import {
   createArcRouter,
-} from '@panom/arc/server';
+} from '@panomapp/arc/server';
 
 const app = express();
 
@@ -106,7 +106,7 @@ app.use('/auth/arc', createArcRouter({
 
 ```ts
 import axios from 'axios';
-import { createArcHttpClient } from '@panom/arc/client';
+import { createArcHttpClient } from '@panomapp/arc/client';
 
 const api = axios.create({ baseURL: '/api' });
 const arcClient = createArcHttpClient(api);
@@ -115,8 +115,8 @@ const arcClient = createArcHttpClient(api);
 ### 3. Code display page
 
 ```ts
-import type { ArcSlot } from '@panom/arc';
-import { useArcSlotPlayback } from '@panom/arc/client';
+import type { ArcSlot } from '@panomapp/arc';
+import { useArcSlotPlayback } from '@panomapp/arc/client';
 ```
 
 Use `useArcSlotPlayback()` to render the active 4x4 ARC slot sequence on the device that needs to sign in.
@@ -125,7 +125,7 @@ Use `useArcSlotPlayback()` to render the active 4x4 ARC slot sequence on the dev
 
 ```ts
 import { ref } from 'vue';
-import { useArcAuthScanner } from '@panom/arc/client';
+import { useArcAuthScanner } from '@panomapp/arc/client';
 
 const videoRef = ref<HTMLVideoElement | null>(null);
 const canvasRef = ref<HTMLCanvasElement | null>(null);

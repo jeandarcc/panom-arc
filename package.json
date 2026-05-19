@@ -1,5 +1,5 @@
 {
-  "name": "@panom/arc",
+  "name": "@panomapp/arc",
   "version": "0.1.0",
   "description": "Camera-readable ARC authentication toolkit for shared grid rendering, Vue scanning flows, Express server routes, and realistic end-to-end simulations.",
   "license": "MIT",
