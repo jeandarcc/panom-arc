@@ -2,7 +2,7 @@
 
 Camera-readable ARC authentication toolkit.
 
-![ARC sign-in demo](./assets/preview.gif)
+![ARC sign-in demo](https://raw.githubusercontent.com/jeandarcc/panom-arc/refs/heads/main/assets/preview.gif)
 
 `@panomapp/arc` packages the full ARC stack in one place:
 
