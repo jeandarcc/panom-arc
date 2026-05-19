@@ -2,6 +2,8 @@
 
 Camera-readable ARC authentication toolkit.
 
+![ARC sign-in demo](./assets/preview.gif)
+
 `@panomapp/arc` packages the full ARC stack in one place:
 
 - shared grid and detection primitives
@@ -174,32 +176,6 @@ This covers:
 - frontend-scanner plus backend-route auth loop
 - network latency and jitter profiles
 - PNG and JSON artifacts in `test-logs/`
-
-## Publishing
-
-Before publishing:
-
-1. Make sure the version in `package.json` is correct.
-2. Run:
-
-   ```bash
-   npm run pack:check
-   npm run selftest
-   ```
-
-3. Log in to npm:
-
-   ```bash
-   npm login
-   ```
-
-4. Publish the scoped package publicly:
-
-   ```bash
-   npm publish --access public
-   ```
-
-See [`PUBLISHING.md`](./PUBLISHING.md) for a complete step-by-step release checklist.
 
 ## Notes
 
