@@ -12,7 +12,7 @@ export interface ArcAuthContext {
 
 export interface ArcRouterDeps {
   authContext(req: Request): ArcAuthContext;
-  issueSession(res: Response, user: any, ctx: ArcAuthContext): Promise<{ accessToken: string; refreshToken: string }>;
+  issueSession(res: Response, user: any, ctx: ArcAuthContext): Promise<void>;
   publicSessionUser(user: any, isNewUser: boolean): any;
   getUserById(userId: string, select?: any): Promise<any>;
   logArcLogin?(

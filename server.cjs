@@ -345,11 +345,11 @@ function createArcRouteHarness(deps) {
           await audit(ctx, 'FAILURE', { userId: status.userId, reason: 'user_not_found_or_deleted' });
           return { statusCode: 200, body: { status: 'expired' } };
         }
-        const { accessToken, refreshToken } = await issueSession(res, user, ctx);
+        await issueSession(res, user, ctx);
         await audit(ctx, 'SUCCESS', { userId: user.id });
         return {
           statusCode: 200,
-          body: { status: 'verified', accessToken, refreshToken, user: publicSessionUser(user, false) },
+          body: { status: 'verified', user: publicSessionUser(user, false) },
         };
       }
       return { statusCode: 200, body: { status: status.status } };
@@ -379,7 +379,7 @@ function createArcRouteHarness(deps) {
           await audit(ctx, 'FAILURE', { userId: result.userId, reason: 'user_not_found_or_deleted' });
           return { statusCode: 403, body: { error: 'User not found or deleted' } };
         }
-        const { accessToken, refreshToken } = await issueSession(res, user, ctx);
+        await issueSession(res, user, ctx);
         console.log(`[ARC route] session-issued challenge=${result.challengeId?.slice(-6) ?? 'none'} userId=${user.id}`);
         await audit(ctx, 'SUCCESS', { userId: user.id });
         return {
@@ -388,8 +388,6 @@ function createArcRouteHarness(deps) {
             matched: true,
             verified: true,
             hits: result.hits,
-            accessToken,
-            refreshToken,
             user: publicSessionUser(user, false),
           },
         };

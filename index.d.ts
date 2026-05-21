@@ -42,8 +42,6 @@ export type ArcStatusResult = {
     theme: string;
     isNewUser: boolean;
   };
-  accessToken?: string;
-  refreshToken?: string;
 };
 export type ArcScanResult = {
   matched: boolean;
@@ -52,8 +50,6 @@ export type ArcScanResult = {
   verified?: boolean;
   challengeId?: string;
   userId?: string;
-  accessToken?: string;
-  refreshToken?: string;
   user?: ArcStatusResult['user'];
 };
 

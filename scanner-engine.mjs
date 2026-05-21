@@ -247,7 +247,7 @@ export function createArcScannerEngine(options = {}) {
   function handleScanResult(result) {
     const events = [];
     state.scanInFlight = false;
-    if (result.verified && result.user && result.accessToken) {
+    if (result.verified && result.user) {
       emit(events, '✅ VERIFIED');
       state.verified = true;
       state.scanLocked = true;

@@ -372,7 +372,7 @@ export function createArcScannerEngine(options = {}) {
   function handleScanResult(result) {
     const events = [];
     state.scanInFlight = false;
-    if (result.verified && result.user && result.accessToken) {
+    if (result.verified && result.user) {
       emit(events, '✅ VERIFIED');
       state.verified = true;
       state.scanLocked = true;
@@ -463,9 +463,6 @@ export function useArcAuthScanner(options) {
     debugLogs.value.unshift({ t, msg, level });
     if (debugLogs.value.length > maxLogs) debugLogs.value.length = maxLogs;
     onDebug?.(msg, level);
-    if (level === 'error') console.error('[ARC]', msg);
-    else if (level === 'warn') console.warn('[ARC]', msg);
-    else console.log('[ARC]', msg);
   }
 
   async function startCamera() {
@@ -610,7 +607,7 @@ export function useArcAuthScanner(options) {
       const handled = engine.handleScanResult(result);
       emitEngineEvents(handled.events);
 
-      if (result.verified && result.user && result.accessToken) {
+      if (result.verified && result.user) {
         clearInterval(scanInterval);
         scanInterval = null;
         clearTimeout(timeoutHandle);
